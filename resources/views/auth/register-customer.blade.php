@@ -27,15 +27,21 @@
             </div>
         </div>
         <div class="authentication-form-wrapper">
-            <form class="form-design" method="post" action="{{route('register')}}">
+            <form class="form-design" method="post" action="{{route('register')}}" enctype="multipart/form-data">
                 @csrf
+
+                @foreach ($errors->all() as $error)
+                {{ $error }}<br />
+                @endforeach
+                <input type="hidden" name="user_type" value="customer">
                 <div class="row no-mrg">
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 no-padd">
                         <div class="blue-bg-wrapper">
                             <div class="avatar-upload">
                                 <div class="avatar-edit">
-                                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                    <input type='file' id="imageUpload" name="image" accept=".png, .jpg, .jpeg" />
                                     <label for="imageUpload">Upload a profile pic</label>
+                                    @error('image')<div class="alert ">{{ $message }}</div>@enderror
                                 </div>
                                 <div class="avatar-preview">
                                     <div id="imagePreview" style="background-image: url(assets/images/thumbnail.png);">
@@ -45,7 +51,8 @@
                             </div>
                             <div class="form-grouph textarea-single-design">
                                 <label>About yourself (Optional)</label>
-                                <textarea>Efficiently promote best-of-breed customer service after magnetic niche markets. Monotonectally generate innovative imperatives and distributed internal or "organic" sources. Intrinsicly orchestrate ethical technology after.</textarea>
+                                <textarea name="bio"></textarea>
+                                @error('bio')<span class="alert ">{{ $message }}</span>@enderror
                             </div>
                             <div class="folow-us">
                                 <ul class="list-unstyled d-flex justify-content-center">
@@ -73,55 +80,69 @@
                                 <div class="form-flex two-column">
                                     <div class="form-left-block">
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="text" placeholder="First name">
+                                            <input type="text" placeholder="First name" name="first_name">
+                                            @error('first_name')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="text" placeholder="Last Name">
+                                            <input type="text" placeholder="Last Name" name="last_name">
+                                            @error('last_name')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="email" placeholder="Email (this will be your login)">
+                                            <input type="email" name="email" placeholder="Email (this will be your login)">
+                                            @error('email')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="text" placeholder="Address">
+                                            <input type="text" name="address" placeholder="Address">
+                                            @error('address')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph mb-30 input-select-abs">
                                             <div class="inputs-box">
-                                                <input type="text" placeholder="City">
+                                                <input type="text" name="city" placeholder="City">
+                                                @error('city')<span class="alert ">{{ $message }}</span>@enderror
                                             </div>
                                             <div class="selecti-box">
-                                                <select class="select-custom-design">
-                                                    <option>State</option>
-                                                    <option>State</option>
-                                                    <option>State</option>
+                                                <select class="select-custom-design" name="state">
+                                                    @foreach ($states as $state )
+                                                    <option value='{{ $state->id }}'>{{$state->name}}</option>
+                                                    @endforeach
                                                 </select>
+                                                @error('state')<span class="alert ">{{ $message }}</span>@enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-right-block">
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="password" placeholder="Password">
+                                            <input type="password" name="password" placeholder="Password">
+                                            @error('password')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="password" placeholder="Confirm Password">
+                                            <input type="password" name="confirm_password" placeholder="Confirm Password">
+                                            @error('confirm_password')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="number" placeholder="Phone Number">
+                                            <input type="number" name="contact_number" placeholder="Phone Number">
+                                            @error('contact_number')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="number" placeholder="Apt # or Unit #">
+                                            <input type="number" name="apt_or_unit" placeholder="Apt # or Unit #">
+                                            @error('apt_or_unit')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="number" placeholder="Zip">
+                                            <input type="number" name="zip_code" placeholder="Zip">
+                                            @error('zip_code')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph select-design mb-30">
-                                            <select class="select-custom-design">
-                                                <option>Payment Method</option>
-                                                <option>PayPal</option>
-                                                <option>Direct Deposit</option>
+                                            <select class="select-custom-design" name="payment_method">
+                                                <option disabled>Payment Method</option>
+                                                <option value="PayPal">PayPal</option>
+                                                <option value="Direct Deposit">Direct Deposit</option>
                                             </select>
+                                            @error('payment_method')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                     </div>
                                 </div>
+                                <input type="checkbox" name="term">
+                                @error('term')<span class="alert ">{{ $message }}</span>@enderror
                                 <div class="form-flex two-column">
                                     <div class="form-left-block">
                                         <div class="terms-text">

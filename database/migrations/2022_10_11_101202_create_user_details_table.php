@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('states_id')->references('id')->on('states')->onDelete('cascade');
-            $table->text('bio');
+            $table->text('bio')->nullable();
+            $table->date('dob')->nullable();
+            $table->string('ssn_or_tax')->nullable();
             $table->text('address');
             $table->string('apt_or_unit');
             $table->string('city', 100);
