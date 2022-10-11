@@ -28,8 +28,9 @@
         </div>
         <div class="authentication-form-wrapper">
 
-            <form class="form-design" method="post" action="{{route('register')}}">
+            <form class="form-design" method="post" action="{{route('register')}}" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="user_type" value="cleaner"> 
                 <div class="row no-mrg">
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 no-padd">
                         <div class="blue-bg-wrapper ">

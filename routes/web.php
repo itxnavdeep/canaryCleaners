@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\PagesController;
+use App\Models\State;
+use App\Http\Controllers\common\commonController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +36,9 @@ Route::get('/storage-link', function () {
     return "storage:link";
 });
 
+// //Home
+Route::get('/', [PagesController::class, 'index']);
 
-//Home
-Route::get('/', [PagesController::class, 'home'])->name('home');
 
 Route::get('sigup-page', function () {
     $title = array(
@@ -47,7 +51,8 @@ Route::get('signup-customers', function () {
     $title = array(
         'active' => 'signup-customers',
     );
-    return view('auth.register-customer', compact('title'));
+    $states = State::where('status', '0')->get();
+    return view('auth.register-customer', compact('title', 'states'));
 })->name('signup-customers');
 
 
@@ -58,3 +63,29 @@ Route::get('signup-cleaner', function () {
     );
     return view('auth.register-cleaner', compact('title'));
 })->name('signup-cleaner');
+
+
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/home', [commonController::class, 'index'])->name('home');
+    // Customer
+    Route::group(['middleware' => ['customer']], function () {
+        Route::get('/customer-account', function () {
+            $title = array(
+                'active' => 'customer-account',
+            );
+            return view('customer.account', compact('title'));
+        })->name('customer-account');
+    });
+
+    // Cleaner
+    Route::group(['middleware' => ['cleaner']], function () {
+        Route::get('cleaner-account', function () {
+            $title = array(
+                'active' => 'cleaner-profile',
+            );
+            return view('cleaner.account', compact('title'));
+        })->name('cleaner-account');
+    });
+});

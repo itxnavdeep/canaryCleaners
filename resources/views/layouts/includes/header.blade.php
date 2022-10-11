@@ -33,16 +33,80 @@
                     </div>
                     <button class="search-toggle l-hide"><img src="assets/images/icons/search.svg"></button>
                 </div>
+
+                @if (Auth::Check())
+                <div class="header-flex-item header-flex-item-3">
+                    <ul class="d-flex align-items-center">
+                        <li class="nav-item email-notification">
+                            <div class="dropdown">
+                                <button type="button" class="btn dropdown-toggle position-relative btn-transparent" data-bs-toggle="dropdown">
+                                    <img src="assets/images/icons/email-2.svg">
+                                    <span class="notification-indicators">11</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="message.html">Link 1</a></li>
+                                    <li><a class="dropdown-item" href="message.html">Link 2</a></li>
+                                    <li><a class="dropdown-item" href="message.html">Link 3</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item signin account-profile">
+                            <div class="dropdown">
+                                <button type="button" class="btn dropdown-toggle position-relative btn-transparent" data-bs-toggle="dropdown">
+                                    <img src="assets/images/icons/profile-circle.svg">
+                                    <span class="name">Alex Jones</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <div class="customer_profile-info">
+                                        <div class="d-flex align-items-center position-relative">
+                                            <div class="customer-pro-img">
+                                                <img src="assets/images/thumbnail.png">
+                                            </div>
+                                            <div class="customer-pro-cntnt">
+                                                <h4>Alex jone</h4>
+                                                <p>Cleaner</p>
+                                            </div>
+                                            <div class="setting-div">
+                                                <a href="customer-account.html"><img src="assets/images/icons/setting.svg"></a>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown-list-design">
+                                            <ul class="list-unstyled">
+                                                <li><a href="customer-account.html">Account</a></li>
+                                                <li><a href="customer-appoitments.html">Appointments</a></li>
+                                                <li><a href="billing-customer.html">Billing</a></li>
+                                                <li><a href="customer-notification.html">Notifications</a></li>
+                                                <li><a href="customer-support-past-service.html">Support</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropsown-logout-design">
+
+                                            <form action="{{ route('logout') }}" method="post">
+                                                @csrf
+                                                <button type="submit"><img src="assets/images/icons/logout.svg"> Logout</button>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                @else
                 <div class="header-flex-item header-flex-item-3 btn_new_3">
                     <div class="btn_sign_in_sign_up">
                         <a href="{{route('signup-page')}}" class="btn_sign_up"><img src="assets/images/icons/user.svg">Sign Up</a>
-                        <a href="login.html" class="btn_sign_in"><img src="assets/images/icons/user.svg">Sign in</a>
+                        <a href="{{route('login')}}" class="btn_sign_in"><img src="assets/images/icons/user.svg">Sign in</a>
                     </div>
                     <a href="signup-cleaner.html"><span class="b_cleaner">Become a Cleaner!</span></a>
                 </div>
                 <div class="toggle_menu d-block d-lg-none">
                     <img src="assets/images/icons/toggle.svg">
                 </div>
+                @endif
+
+
             </div>
         </div>
     </div>
