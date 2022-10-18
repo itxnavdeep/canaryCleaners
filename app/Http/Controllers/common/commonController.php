@@ -9,11 +9,18 @@ class commonController extends Controller
 {
     public function index()
     {
-     
-        if (auth()->user()->role == 'customer') {
-            return redirect()->route('customer-account');
-        } elseif (auth()->user()->role == 'cleaner') {
-            return redirect()->route('cleaner-account');
+        $user = auth()->user()->role;
+
+        if ($user  == 'customer') {
+            $title = array(
+                'active' => 'customer-account',
+            );
+            return view("customer.account", compact('title'));
+        } elseif ($user  == 'cleaner') {
+            $title = array(
+                'active' => 'cleaner-account',
+            );
+            return view("cleaner.account", compact('title'));
         }
     }
 }

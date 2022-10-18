@@ -61,7 +61,8 @@ Route::get('signup-cleaner', function () {
     $title = array(
         'active' => 'signup-cleaner',
     );
-    return view('auth.register-cleaner', compact('title'));
+    $states = State::where('status', '0')->get();
+    return view('auth.register-cleaner', compact('title', 'states'));
 })->name('signup-cleaner');
 
 
@@ -87,5 +88,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
             );
             return view('cleaner.account', compact('title'));
         })->name('cleaner-account');
+
+        Route::get('team-info',function() {
+            $title =array(
+                'active' => 'team-info',
+            );
+            return view('cleaner.team-info', compact('title'));
+        })->name('team-info');
+
     });
 });
