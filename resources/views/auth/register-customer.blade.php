@@ -79,29 +79,30 @@
                             <div class="signup-form-grouph">
                                 <div class="form-flex two-column">
                                     <div class="form-left-block">
+                                    <input type="hidden"  name="role" value="customer">
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="text" placeholder="First name" name="first_name">
+                                            <input type="text" placeholder="First name" name="first_name" value="{{old('first_name')}}">
                                             @error('first_name')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="text" placeholder="Last Name" name="last_name">
+                                            <input type="text" placeholder="Last Name" name="last_name"  value="{{old('last_name')}}">
                                             @error('last_name')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="email" name="email" placeholder="Email (this will be your login)">
+                                            <input type="email" name="email" placeholder="Email (this will be your login)"  value="{{old('email')}}">
                                             @error('email')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="text" name="address" placeholder="Address">
+                                            <input type="text" name="address" placeholder="Address" value="{{old('address')}}">
                                             @error('address')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph mb-30 input-select-abs">
                                             <div class="inputs-box">
-                                                <input type="text" name="city" placeholder="City">
+                                                <input type="text" name="city" placeholder="City" value="{{old('city')}}">
                                                 @error('city')<span class="alert ">{{ $message }}</span>@enderror
                                             </div>
                                             <div class="selecti-box">
-                                                <select class="select-custom-design" name="state">
+                                                <select class="select-custom-design" name="state" value="{{old('state')}}">
                                                     @foreach ($states as $state )
                                                     <option value='{{ $state->id }}'>{{$state->name}}</option>
                                                     @endforeach
@@ -112,27 +113,27 @@
                                     </div>
                                     <div class="form-right-block">
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="password" name="password" placeholder="Password">
+                                            <input type="password" name="password" placeholder="Password" value="{{old('password')}}">
                                             @error('password')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="password" name="confirm_password" placeholder="Confirm Password">
+                                            <input type="password" name="confirm_password" placeholder="Confirm Password" value="{{old('confirm_password')}}">
                                             @error('confirm_password')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="number" name="contact_number" placeholder="Phone Number">
+                                            <input type="number" name="contact_number" placeholder="Phone Number" value="{{old('contact_number')}}">
                                             @error('contact_number')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="number" name="apt_or_unit" placeholder="Apt # or Unit #">
+                                            <input type="number" name="apt_or_unit" placeholder="Apt # or Unit #" value="{{old('apt_or_unit')}}">
                                             @error('apt_or_unit')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph input-design mb-30">
-                                            <input type="number" name="zip_code" placeholder="Zip">
+                                            <input type="number" name="zip_code" placeholder="Zip" value="{{old('apt_or_unit')}}">
                                             @error('zip_code')<span class="alert ">{{ $message }}</span>@enderror
                                         </div>
                                         <div class="form-grouph select-design mb-30">
-                                            <select class="select-custom-design" name="payment_method">
+                                            <select class="select-custom-design" name="payment_method" value="{{old('payment_method')}}">
                                                 <option disabled>Payment Method</option>
                                                 <option value="PayPal">PayPal</option>
                                                 <option value="Direct Deposit">Direct Deposit</option>
